@@ -31,19 +31,23 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
         roundScores = roundScores + diceNumber;
         document.getElementById("current-" + activePlayer).textContent = roundScores;
     }else{
-        // тоглогчийн ээлжиндээ цуглуулсан оноог 0 болгоно
-        roundScores = 0;
-        document.getElementById("current-" + activePlayer).textContent = 0;
-        // 1 буусан тул тоглогчийн оноог 0 болгож ээлжийг шилжүүлнэ
-        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-        // улаан цэгийг шилжүүлэхremove add
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        document.querySelector(".player-1-panel").classList.toggle("active");
-        //Шооны зургийг алга болгох
-        diceDom.style.display = "none";
+       addToNewPlayer();
     }
 });
-// Hold товч дарж цуглуулсан оноогоо хадгалж авах
+//Hold товч дарж цуглуулсан оноогоо хадгалж авах
 Document.querySelector(".btn-hold").addEventListener("click", function(){
-    scores[0] = scores[0] + 
+    scores[activePlayer] = scores[activePlayer] + roundScores;
 });
+
+function addToNewPlayer(){
+ // тоглогчийн ээлжиндээ цуглуулсан оноог 0 болгоно
+ roundScores = 0;
+ document.getElementById("current-" + activePlayer).textContent = 0;
+ // 1 буусан тул тоглогчийн оноог 0 болгож ээлжийг шилжүүлнэ
+ activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+ // улаан цэгийг шилжүүлэхremove add
+ document.querySelector(".player-0-panel").classList.toggle("active");
+ document.querySelector(".player-1-panel").classList.toggle("active");
+ //Шооны зургийг алга болгох
+ diceDom.style.display = "none";
+}

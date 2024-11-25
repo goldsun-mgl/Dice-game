@@ -35,13 +35,32 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
     }
 });
 //Hold товч дарж цуглуулсан оноогоо хадгалж авах
-Document.querySelector(".btn-hold").addEventListener("click", function(){
-    scores[activePlayer] = scores[activePlayer] + roundScores;
+document.querySelector(".btn-hold").addEventListener("click", function() {
+    //alert(scores[0]);
+    scores[activePlayer] = scores[activePlayer] + roundScores; 
+    //Дэлгэц дээр оноог нь өөрчлөнө
+    document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
+    //Тоглогч хожсон эсэхийг шалгах Оноо нь 100-гаас их эсэх
+    if(scores[activePlayer] >=100) {
+        //Ялагч гэсэн текстийг нэрийнх оронд гаргах
+        document.getElementById("name-" + activePlayer).textContent = "WINNER!!!";
+        //Winner-ийн дизианыг өөрчлөх
+        document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");
+        document.querySelector(".player-" + activePlayer + "-panel").classList.remove("winner");
+        document.getElementById("score-0").textContent = 0;
+        document.getElementById("score-1").textContent = 0;
+       // Document.querySelector(".btn-roll").addEventListener("m", )
+        addToNewPlayer();
+    } else {
+        // оноог 0 болгож тоглогчийг шилжүүл
+        addToNewPlayer();
+    }
 });
 
 function addToNewPlayer(){
  // тоглогчийн ээлжиндээ цуглуулсан оноог 0 болгоно
  roundScores = 0;
+ 
  document.getElementById("current-" + activePlayer).textContent = 0;
  // 1 буусан тул тоглогчийн оноог 0 болгож ээлжийг шилжүүлнэ
  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
